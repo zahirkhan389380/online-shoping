@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form to Email Using javascript</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <form id="contactForm" onsubmit="sendEmail(); return false;">
+
+            <h3>GET IN TOUCH</h3>
+            <input type="text" id="Name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Email id" required>
+            <input type="text" id="phone" placeholder="phone no" required>
+            <textarea id="message" rows="4" placeholder="How can we help you?" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <!-- go to website (smtp js)-->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+        function sendEmail() {
+            var name = document.getElementById("Name").value;
+            var email = document.getElementById("email").value;
+            var phone = document.getElementById("phone").value;
+            var message = document.getElementById("message").value;
+            
+            Email.send({
+                Host: "smtp.gmail.com",
+                Username: "mohd01011991@gmail.com",
+                Password: "Zahirkh@56",
+                To: 'zaheerkhab5@gmail.com',
+                From: document.getElementById("email").value,
+                Subject: "New contact Form Enquiry",
+                Body: `Name: ${name}<br>Email: ${email}<br>Phone: ${phone}<br>Message: ${message}`
+            }).then(
+                message => alert("Message sent successfully")
+            ).catch(
+                error => alert("Failed to send message: " + error)
+            );
+
+            document.getElementById("contactForm").reset();
+        }
+    </script>
+</body>
+</html>
